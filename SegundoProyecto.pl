@@ -1,18 +1,23 @@
-% En la consola de Swi-Prolog usar pack_install("libreria") para instalar los elementos necesarios
-:- use_module(library(lambda)).%Librerias utilizadas
-:- use_module(library(lambda_abstractions)).
-:- use_module(library(apply)).
-
-y(Predicado, Arg, Resultado) :- %Combinador Y
-    Pred = ((N2, F2) :- call(Predicado, N2, F2, Predicado)),
-    call(Pred, Arg, Resultado).
-%Recibe el predicado, paramentros y el resultado calculado hasta el momento
-%nos ayuda a realizar la recursión con la ayuda de la función lambda en cada predicado que es
-%utilizado
-%esta implementación se ve muy reflejada en el video de  Disecting a Y Combinator de  
-%Byte-Sized JavaScript
-%https://www.youtube.com/watch?v=EKlYknzJQkw
-
+%
+% ===============================================
+%
+% (c) 2021
+% version 1.0.0 2021-11-26
+%
+% -----------------------------------------------
+% EIF400 Paradigmas de Programación
+% 2do ciclo 2021, grupo 02(8pm)
+% Proyecto 2
+%
+% 117250610 Barrientos Araya,Daniel
+% 
+% ===============================================
+%
 pow(_, 0, 1):-!.
 pow(X, N, Total) :- N0 is N - 1, 
-pow(X, N0, Acum), Total is X * Acum.
+pow(X, N0, Acum), Total is X * Acum.%No utilizada
+
+
+evaluar(_, [], 0).
+evaluar(X, [Z | Ls0], D) :- 
+evaluar(X, Ls0, R0), D is Z + (X * R0).
